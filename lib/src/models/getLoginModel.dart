@@ -39,6 +39,7 @@ class Data {
     this.email,
     this.nama,
     this.telpon,
+    this.tipe,
   });
 
   String idToken;
@@ -46,6 +47,7 @@ class Data {
   String email;
   String nama;
   String telpon;
+  String tipe;
 
   factory Data.fromRawJson(String str) => Data.fromJson(json.decode(str));
 
@@ -57,6 +59,7 @@ class Data {
     email: json["email"],
     nama: json["nama"],
     telpon: json["telpon"],
+    tipe: json["tipe"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -65,5 +68,6 @@ class Data {
     "email": email,
     "nama": nama,
     "telpon": telpon,
+    "tipe": tipe,
   };
 }
