@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lelangapp/src/ui/home.dart';
+import 'package:lelangapp/src/ui/home2.dart';
 import 'package:lelangapp/src/ui/profilePage.dart';
 import 'package:lelangapp/src/ui/transaksiPage.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
@@ -19,7 +20,8 @@ class _ControllerPageState extends State<ControllerPage> {
   final List<Widget> _widgetOptions = [
     Home(),
     TransaksiPage(),
-    ProfilePage()
+    ProfilePage(),
+    // Home2Page(),
   ];
 
   Future<bool> _onWillPop() {
@@ -66,14 +68,18 @@ class _ControllerPageState extends State<ControllerPage> {
             icon: Icon(Icons.confirmation_number),
             title: Text('Transaksi'),
           ),
-//          BottomNavigationBarItem(
-//            icon: Icon(Icons.mail_outline),
-//            title: Text('Toko Saya'),
-//          ),
+         // BottomNavigationBarItem(
+         //   icon: Icon(Icons.mail_outline),
+         //   title: Text('Toko Saya'),
+         // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             title: Text('Profile'),
           ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.add),
+          //   title: Text("home 2")
+          // )
         ],
         elevation: 16,
         unselectedItemColor: const Color(0xFFbdbfbe),

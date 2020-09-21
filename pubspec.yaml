@@ -53,6 +53,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logoudang.png
+    - assets/image/udang1.jpg
+    - assets/image/udang2.jpg
+    - assets/image/udang3.jpeg
+    - assets/image/udang4.png
+    - assets/image/udang5.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

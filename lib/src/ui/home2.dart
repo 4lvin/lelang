@@ -1,17 +1,15 @@
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lelangapp/src/pref/preferences.dart';
-import 'package:lelangapp/src/ui/publishLelang.dart';
-import 'package:lelangapp/src/ui/utils/colors.dart';
 import 'package:lelangapp/src/ui/utils/customBackground.dart';
-import 'package:lelangapp/src/ui/utils/customBackground.dart';
-import 'package:page_transition/page_transition.dart';
 
-class Home extends StatefulWidget {
+class Home2Page extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _Home2PageState createState() => _Home2PageState();
 }
 
-class _HomeState extends State<Home> {
+class _Home2PageState extends State<Home2Page> {
   String nama;
 
   String greeting() {
@@ -45,8 +43,8 @@ class _HomeState extends State<Home> {
     final double widthScreen = MediaQuery.of(context).size.width;
     final double heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+        child: Column(
           children: <Widget>[
             Stack(
               children: <Widget>[
@@ -54,14 +52,37 @@ class _HomeState extends State<Home> {
                   child: CustomBackgroundHome(),
                 ),
                 Positioned(
-                    top: 50,
-                    left: 12,
-                    child: Text(
-                      greeting(),
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    )),
+                  top: 50,
+                  left: 12,
+                  child: Text(
+                    greeting(),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: <Widget>[
+                //     Container(
+                //       padding: EdgeInsets.only(top: 50,left: 12),
+                //       child: Text(
+                //         greeting(),
+                //         style: TextStyle(
+                //           color: Colors.white,
+                //           fontSize: 16
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // )
               ],
             ),
+            // Container(
+            //   padding: EdgeInsets.all(10),
+            //   child: Text('Home Page'),
+            // ),
             Container(
               padding: EdgeInsets.only(left: 12, right: 12),
               child: Row(
@@ -105,16 +126,16 @@ class _HomeState extends State<Home> {
                     Container(
                       margin: EdgeInsets.only( bottom: 10, left: 5, right: 5),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.grey),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(1,1),
-                                blurRadius: 1
-                            )
-                          ]
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.grey),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(1,1),
+                            blurRadius: 1
+                          )
+                        ]
                       ),
                       child: Container(
                         child: Column(
@@ -126,7 +147,7 @@ class _HomeState extends State<Home> {
                                 child: Image(
                                   fit: BoxFit.cover,
                                   image: AssetImage(
-                                      'assets/image/udang1.jpg'
+                                    'assets/image/udang1.jpg'
                                   ),
                                   height: MediaQuery.of(context).size.height * 0.25,
                                 ),
@@ -136,7 +157,7 @@ class _HomeState extends State<Home> {
                               padding: EdgeInsets.only(top: 10, right: 5, left: 5),
                               child: Text(
                                 'Udang Pak Tarno', style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w700
+                                fontSize: 20, fontWeight: FontWeight.w700
                               ),
                               ),
                             ),
@@ -144,7 +165,7 @@ class _HomeState extends State<Home> {
                               padding: EdgeInsets.only(top: 5, bottom: 0, right: 5, left: 5),
                               child: Text(
                                 'Udang Kering', style: TextStyle(
-                                  fontSize: 10
+                                fontSize: 10
                               ),
                               ),
                             ),
@@ -198,7 +219,7 @@ class _HomeState extends State<Home> {
                                 child: Image(
                                   fit: BoxFit.cover,
                                   image: AssetImage(
-                                      'assets/image/udang2.jpg'
+                                    'assets/image/udang2.jpg'
                                   ),
                                   height: MediaQuery.of(context).size.height * 0.25,
                                 ),
@@ -208,7 +229,7 @@ class _HomeState extends State<Home> {
                               padding: EdgeInsets.only(top: 10, right: 5, left: 5),
                               child: Text(
                                 'Udang pak Udin', style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w700
+                                fontSize: 20, fontWeight: FontWeight.w700
                               ),
                               ),
                             ),
@@ -216,7 +237,7 @@ class _HomeState extends State<Home> {
                               padding: EdgeInsets.only(top: 5, bottom: 0, right: 5, left: 5),
                               child: Text(
                                 'Udang Basah', style: TextStyle(
-                                  fontSize: 10
+                                fontSize: 10
                               ),
                               ),
                             ),
@@ -324,17 +345,7 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        floatingActionButton: new FloatingActionButton(
-            elevation: 0.0,
-            child: new Icon(Icons.publish),
-            backgroundColor: colorses.hijauDasar,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.downToUp,
-                      duration: Duration(milliseconds: 200),
-                      child: PublishLelang(a: "akuuuuuuuuu",)));
-            }));
+      ),
+    );
   }
 }
