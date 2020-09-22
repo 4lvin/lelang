@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
 
 class PublishLelang extends StatefulWidget {
-  PublishLelang({this.a});
-  String a;
   @override
   _PublishLelangState createState() => _PublishLelangState();
 }
@@ -35,7 +33,6 @@ class _PublishLelangState extends State<PublishLelang> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(widget.a),
             Container(
               margin: EdgeInsets.only(top: 12,left: 25,right: 25),
               child: TextField(

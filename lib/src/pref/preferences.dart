@@ -74,3 +74,18 @@ Future rmvTelp() async {
 
   return prefs.remove("telp");
 }
+
+Future setTipe(String value) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.setString("tipe", value);
+}
+Future getTipe() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  return prefs.getString("tipe");
+}
+Future rmvTipe() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  return prefs.remove("tipe");
+}

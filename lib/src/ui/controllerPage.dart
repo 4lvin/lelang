@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lelangapp/src/ui/home.dart';
-import 'package:lelangapp/src/ui/home2.dart';
 import 'package:lelangapp/src/ui/profilePage.dart';
 import 'package:lelangapp/src/ui/transaksiPage.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
@@ -21,7 +20,6 @@ class _ControllerPageState extends State<ControllerPage> {
     Home(),
     TransaksiPage(),
     ProfilePage(),
-    // Home2Page(),
   ];
 
   Future<bool> _onWillPop() {

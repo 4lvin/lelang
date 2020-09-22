@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String nama;
-
+  String tipe;
   String greeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
@@ -37,6 +37,13 @@ class _HomeState extends State<Home> {
         });
       }
     });
+    getTipe().then((value){
+      if (mounted) {
+        setState(() {
+          tipe = value;
+        });
+      }
+    });
     super.initState();
   }
 
@@ -45,7 +52,7 @@ class _HomeState extends State<Home> {
     final double widthScreen = MediaQuery.of(context).size.width;
     final double heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Column(
+        body: tipe=="Petani"?Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Stack(
@@ -323,8 +330,10 @@ class _HomeState extends State<Home> {
               ),
             )
           ],
+        ):Container(
+          child: Center(child: Text("Suplier")),
         ),
-        floatingActionButton: new FloatingActionButton(
+        floatingActionButton: tipe=="Petani"?FloatingActionButton(
             elevation: 0.0,
             child: new Icon(Icons.publish),
             backgroundColor: colorses.hijauDasar,
@@ -334,7 +343,7 @@ class _HomeState extends State<Home> {
                   PageTransition(
                       type: PageTransitionType.downToUp,
                       duration: Duration(milliseconds: 200),
-                      child: PublishLelang(a: "akuuuuuuuuu",)));
-            }));
+                      child: PublishLelang()));
+            }):Container());
   }
 }

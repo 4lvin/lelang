@@ -34,6 +34,7 @@ dependencies:
   rxdart: ^0.22.2
   progress_dialog: ^1.2.4
   shared_preferences: ^0.5.7+3
+  flutter_sequence_animation: ^3.0.1
 
 dev_dependencies:
   flutter_test:

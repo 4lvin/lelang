@@ -135,6 +135,7 @@ class _LoginState extends State<Login> {
                             setEmail(_email.text);
                             setNama(value.data.nama);
                             setTelp(value.data.telpon);
+                            setTipe(value.data.tipe);
                             Navigator.of(context)
                                 .pushNamedAndRemoveUntil('/controllPage', (Route<dynamic> route) => false);
                           } else {
