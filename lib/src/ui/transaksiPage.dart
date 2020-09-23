@@ -108,9 +108,9 @@ class _TransaksiPageState extends State<TransaksiPage> {
                               ),
                               Container(
                                 child: Text(
-                                  '02 : 43 : 06',
+                                  '02 : 43 : 16',
                                   style: TextStyle(
-                                      color: Color.fromRGBO(0,191,165, 1),
+                                      color: colorses.hijauDurasi,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
@@ -132,7 +132,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                 child: Text(
                                   'Rp. 7.500.000',
                                   style: TextStyle(
-                                      color: Color.fromRGBO(24,152,131, 1),
+                                      color: colorses.hijauHarga,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
@@ -202,7 +202,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                 child: Text(
                                   '02 : 43 : 06',
                                   style: TextStyle(
-                                      color: Color.fromRGBO(0,191,165, 1),
+                                      color: colorses.hijauDurasi,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
@@ -224,7 +224,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                 child: Text(
                                   'Rp. 7.500.000',
                                   style: TextStyle(
-                                      color: Color.fromRGBO(24,152,131, 1),
+                                      color: colorses.hijauHarga,
                                       fontWeight: FontWeight.w600
                                   ),
                                 ),
