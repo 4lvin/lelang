@@ -11,4 +11,8 @@ class Repositories {
 
   Future login(String email, String password) =>
       apiProvider.login(email, password);
+
+  Future getLIstLelang(String petani) => apiProvider.getLIstLelang(petani);
+
+  Future DetailLelang(String id) => apiProvider.detailLelang(id);
 }

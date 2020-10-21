@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as client;
 import 'package:lelangapp/src/models/getCheckOtpModel.dart';
+import 'package:lelangapp/src/models/getLelangDetailModel.dart';
+import 'package:lelangapp/src/models/getListLelangPetani.dart';
 import 'package:lelangapp/src/models/getLoginModel.dart';
 import 'dart:io';
 
@@ -9,6 +12,7 @@ import 'package:lelangapp/src/models/getRegisterModel.dart';
 
 class ApiProviders {
   String url = "https://jongjava.tech/lelang/restapi";
+  String url2 = "http://192.168.1.73:3000";
 
   Future register(
       String nama, String email, String telp, String pass, String tipe) async {
@@ -95,6 +99,24 @@ class ApiProviders {
       throw Exception("request salah");
     } on TimeoutException catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  Future getLIstLelang(String petani) async {
+    final getList = await client.get("$url2/v1/lelang/list/$petani");
+    if (getList.statusCode  ==  200){
+      return Getlistlelangpetani.fromJson(json.decode(getList.body));
+    } else {
+      throw Exception('Failed to Load Setor');
+    }
+  }
+
+  Future detailLelang(String id) async {
+    final getList = await client.get("$url2/v1/lelang/detail/$id");
+    if(getList.statusCode == 200) {
+      return Getdetailelang.fromJson(json.decode(getList.body));
+    } else {
+      throw Exception('Failed to Load Setor');
     }
   }
 }

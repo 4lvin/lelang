@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/pref/preferences.dart';
 import 'package:lelangapp/src/ui/ikutlelang.dart';
 import 'package:lelangapp/src/ui/publishLelang.dart';
@@ -15,6 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String nama;
   String tipe;
+  String username;
   String greeting() {
     var hour = DateTime.now().hour;
     if (hour < 12) {
@@ -37,6 +39,11 @@ class _HomeState extends State<Home> {
           nama = value;
         });
       }
+    });
+    getKdUser().then((value) {
+      setState(() {
+        username = value;
+      });
     });
     getTipe().then((value){
       if (mounted) {
@@ -470,147 +477,84 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only( bottom: 10, left: 5, right: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.grey),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(1,1),
-                                blurRadius: 1
-                            )
-                          ]
-                      ),
+                    GestureDetector(
+                      onTap: () {
+                        print(username);
+                        blocMember.listlelangpetani(username);
+                        blocMember.listLelang.listen((value) {
+                          print(value.hasil);
+                        });
+                      },
                       child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
-                              child: Center(
-                                child: Image(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      'assets/image/udang1.jpg'
-                                  ),
-                                  height: MediaQuery.of(context).size.height * 0.25,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10, right: 5, left: 5),
-                              child: Text(
-                                'Udang Pak Tarno', style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w700
-                              ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 5, bottom: 0, right: 5, left: 5),
-                              child: Text(
-                                'Udang Kering', style: TextStyle(
-                                  fontSize: 10
-                              ),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 0.0, bottom: 5.0, right: 5.0, left: 5.0),
-                              child: Text('12 Ton', style: TextStyle(
-                                fontSize: 10,
-                              ),),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(right: 5.0, left: 5.0, bottom: 5.0),
-                              child: Text('Rp. 12.000.000', style: TextStyle(
-                                  color: Color.fromRGBO(0,142,118, 1),
-                                  fontWeight: FontWeight.w600
-                              ),),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(Icons.person_pin_circle, size: 12,),
-                                  Text("Pasuruan Timur")
-                                ],
-                              ),
-                            )
-                          ],
+                        margin: EdgeInsets.only( bottom: 10, left: 5, right: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.grey),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(1,1),
+                                  blurRadius: 1
+                              )
+                            ]
                         ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only( bottom: 10, left: 5, right: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.grey),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(1,1),
-                                blurRadius: 1
-                            )
-                          ]
-                      ),
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                              child: Center(
-                                child: Image(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      'assets/image/udang2.jpg'
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                                child: Center(
+                                  child: Image(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        'assets/image/udang2.jpg'
+                                    ),
+                                    height: MediaQuery.of(context).size.height * 0.25,
                                   ),
-                                  height: MediaQuery.of(context).size.height * 0.25,
                                 ),
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 10, right: 5, left: 5),
-                              child: Text(
-                                'Udang pak Udin', style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w700
+                              Container(
+                                padding: EdgeInsets.only(top: 10, right: 5, left: 5),
+                                child: Text(
+                                  'Udang pak Udin', style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w700
+                                ),
+                                ),
                               ),
+                              Container(
+                                padding: EdgeInsets.only(top: 5, bottom: 0, right: 5, left: 5),
+                                child: Text(
+                                  'Udang Basah', style: TextStyle(
+                                    fontSize: 10
+                                ),
+                                ),
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 5, bottom: 0, right: 5, left: 5),
-                              child: Text(
-                                'Udang Basah', style: TextStyle(
-                                  fontSize: 10
+                              Container(
+                                padding: EdgeInsets.only(top: 0.0, bottom: 5.0, right: 5.0, left: 5.0),
+                                child: Text('15 Ton', style: TextStyle(
+                                  fontSize: 10,
+                                ),),
                               ),
+                              Container(
+                                padding: EdgeInsets.only(right: 5.0, left: 5.0, bottom: 5.0),
+                                child: Text('Rp. 20.000.000', style: TextStyle(
+                                    color: Color.fromRGBO(0,142,118, 1),
+                                    fontWeight: FontWeight.w600
+                                ),),
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(top: 0.0, bottom: 5.0, right: 5.0, left: 5.0),
-                              child: Text('15 Ton', style: TextStyle(
-                                fontSize: 10,
-                              ),),
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(right: 5.0, left: 5.0, bottom: 5.0),
-                              child: Text('Rp. 20.000.000', style: TextStyle(
-                                  color: Color.fromRGBO(0,142,118, 1),
-                                  fontWeight: FontWeight.w600
-                              ),),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(Icons.person_pin_circle, size: 12,),
-                                  Text("Pasuruan Timur")
-                                ],
-                              ),
-                            )
-                          ],
+                              Container(
+                                padding: EdgeInsets.all(5),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.person_pin_circle, size: 12,),
+                                    Text("Pasuruan Timur")
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

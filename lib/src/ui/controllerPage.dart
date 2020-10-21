@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lelangapp/src/ui/home.dart';
+import 'package:lelangapp/src/ui/home2.dart';
 import 'package:lelangapp/src/ui/profilePage.dart';
 import 'package:lelangapp/src/ui/transaksiPage.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
@@ -20,6 +21,7 @@ class _ControllerPageState extends State<ControllerPage> {
     Home(),
     TransaksiPage(),
     ProfilePage(),
+    HomePage2(),
   ];
 
   Future<bool> _onWillPop() {
@@ -74,10 +76,10 @@ class _ControllerPageState extends State<ControllerPage> {
             icon: Icon(Icons.person_outline),
             title: Text('Profile'),
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.add),
-          //   title: Text("home 2")
-          // )
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            title: Text("home 2")
+          ),
         ],
         elevation: 16,
         unselectedItemColor: const Color(0xFFbdbfbe),
