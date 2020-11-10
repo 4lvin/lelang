@@ -400,7 +400,7 @@ class _HomeState extends State<Home> {
                         Navigator.push(
                             context,
                             PageTransition(
-                                type: PageTransitionType.downToUp,
+                                type: PageTransitionType.bottomToTop,
                                 duration: Duration(milliseconds: 200),
                                 child: BitLelang()));
                       },
@@ -644,7 +644,7 @@ class _HomeState extends State<Home> {
               Navigator.push(
                   context,
                   PageTransition(
-                      type: PageTransitionType.downToUp,
+                      type: PageTransitionType.bottomToTop,
                       duration: Duration(milliseconds: 200),
                       child: PublishLelang()));
             }):Container());

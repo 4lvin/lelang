@@ -12,7 +12,8 @@ import 'package:lelangapp/src/models/getRegisterModel.dart';
 
 class ApiProviders {
   String url = "https://jongjava.tech/lelang/restapi";
-  String url2 = "http://192.168.1.73:3000";
+  String url2 = "http://192.168.1.4:3000";
+  // String url2 = "http://192.168.89.51:3000";
 
   Future register(
       String nama, String email, String telp, String pass, String tipe) async {

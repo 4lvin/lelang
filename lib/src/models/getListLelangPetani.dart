@@ -43,6 +43,8 @@ class Result {
     this.harga,
     this.timbangan,
     this.lokasi,
+    this.jenis,
+    this.deskripsi,
     this.created,
     this.v,
   });
@@ -56,6 +58,8 @@ class Result {
   String harga;
   String timbangan;
   String lokasi;
+  String jenis;
+  String deskripsi;
   DateTime created;
   int v;
 
@@ -69,6 +73,8 @@ class Result {
     harga: json["harga"],
     timbangan: json["timbangan"],
     lokasi: json["lokasi"],
+    jenis: json["jenis"],
+    deskripsi: json["deskripsi"],
     created: DateTime.parse(json["created"]),
     v: json["__v"],
   );
@@ -83,6 +89,8 @@ class Result {
     "harga": harga,
     "timbangan": timbangan,
     "lokasi": lokasi,
+    "jenis": jenis,
+    "deskripsi": deskripsi,
     "created": created.toIso8601String(),
     "__v": v,
   };
