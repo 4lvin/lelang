@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/getLelangDetailModel.dart';
@@ -16,6 +17,10 @@ class _NgeBitState extends State<NgeBit> {
   Duration mundur = new Duration(hours:2, minutes:3, seconds:2);
   Duration fastestMarathon = new Duration(hours:2, minutes:3, seconds:2);
   var d = Duration(days: 1, hours: 1, minutes: 33, seconds: 50);
+  TextEditingController inputbit = TextEditingController(text:"");
+  var _input = TextEditingController();
+  // String inputharga;
+  int inputharga;
   @override
   void initState(){
     blocMember.DetailLelang(widget.id);
@@ -144,7 +149,7 @@ class _NgeBitState extends State<NgeBit> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       onTap: (){
-
+                                        inputharga = int.parse("50000");
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width / 2.3,
@@ -200,7 +205,7 @@ class _NgeBitState extends State<NgeBit> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       onTap: (){
-
+                                        inputharga = int.parse("100000");
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width / 2.3,
@@ -233,8 +238,86 @@ class _NgeBitState extends State<NgeBit> {
                               ),
                             ),
                           ],
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(0),
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: colorses.hijauDasar,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                          margin: EdgeInsets.all(0),
+                                width: MediaQuery.of(context).size.width / 1.25,
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  decoration: InputDecoration(
+                                    hintText: 'Input Harga Manual',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    focusColor: colorses.hijauDasar,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0), topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                                    ),
+                                  ),
+                                  onChanged: (value){
+                                    setState(() {
+
+                                    });
+                                  },
+                                ),
+                              ),
+                              Container(
+                                // width: MediaQuery.of(context).size.width / 8,
+                                // child: new Icon(
+                                //   Icons.arrow_right_alt_sharp,
+                                //   color: Colors.white,
+                                // ),
+                                child: Material(
+                                  type: MaterialType.transparency,
+                                  elevation: 9.0,
+                                  color: Colors.transparent,
+                                  shadowColor: Colors.grey[50],
+                                  child: InkWell(
+                                    splashColor: Colors.white30,
+                                    onTap: (){
+                                      print(inputharga);
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width / 8,
+                                      child: new Icon(
+                                        Icons.arrow_right_alt_sharp,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         )
                       ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Material(
+                      type: MaterialType.transparency,
+                      elevation: 9.0,
+                      color: Colors.transparent,
+                      shadowColor: Colors.grey[50],
+                      child: InkWell(
+                        splashColor: Colors.white30,
+                        onTap: (){
+                          print(inputharga);
+                        },
+                        child: Container(
+
+                        ),
+                      ),
                     ),
                   )
                 ],
