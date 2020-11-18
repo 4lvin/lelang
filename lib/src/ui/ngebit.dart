@@ -19,7 +19,9 @@ class _NgeBitState extends State<NgeBit> {
   var d = Duration(days: 1, hours: 1, minutes: 33, seconds: 50);
   TextEditingController inputbit = TextEditingController(text:"");
   var _input = TextEditingController();
-  // String inputharga;
+  Color seket = colorses.hijauHarga;
+  Color satus = colorses.hijauHarga;
+
   int inputharga;
   @override
   void initState(){
@@ -135,7 +137,7 @@ class _NgeBitState extends State<NgeBit> {
                                 elevation: 9,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: colorses.hijauDasar,
+                                    color: seket,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Material(
@@ -149,7 +151,17 @@ class _NgeBitState extends State<NgeBit> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       onTap: (){
-                                        inputharga = int.parse("50000");
+                                        setState(() {
+                                          if(seket == colorses.tombolaktif){
+                                            inputharga = null;
+                                            seket = colorses.hijauHarga;
+                                          } else {
+                                            inputharga = int.parse("50000");
+                                            _input = TextEditingController(text: "");
+                                            seket = colorses.tombolaktif;
+                                            satus = colorses.hijauHarga;
+                                          }
+                                        });
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width / 2.3,
@@ -191,7 +203,7 @@ class _NgeBitState extends State<NgeBit> {
                                 elevation: 9,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: colorses.hijauDasar,
+                                    color: satus,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Material(
@@ -205,7 +217,17 @@ class _NgeBitState extends State<NgeBit> {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       onTap: (){
-                                        inputharga = int.parse("100000");
+                                        setState(() {
+                                          if(satus == colorses.tombolaktif){
+                                            inputharga = null;
+                                            satus = colorses.hijauHarga;
+                                          } else {
+                                            inputharga = int.parse("100000");
+                                            satus = colorses.tombolaktif;
+                                            seket = colorses.hijauHarga;
+                                            _input = TextEditingController(text: "");
+                                          }
+                                        });
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width / 2.3,
@@ -239,71 +261,107 @@ class _NgeBitState extends State<NgeBit> {
                             ),
                           ],
                         ),
+                        // Container(
+                        //   padding: EdgeInsets.all(0),
+                        //   margin: EdgeInsets.all(10),
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(10),
+                        //     color: colorses.hijauDasar,
+                        //   ),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //     children: [
+                        //       Container(
+                        //         margin: EdgeInsets.all(0),
+                        //         width: MediaQuery.of(context).size.width / 1.25,
+                        //         child: TextField(
+                        //           keyboardType: TextInputType.number,
+                        //           decoration: InputDecoration(
+                        //             hintText: 'Input Harga Manual',
+                        //             filled: true,
+                        //             fillColor: Colors.white,
+                        //             focusColor: colorses.hijauDasar,
+                        //             border: OutlineInputBorder(
+                        //               borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0), topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                        //             ),
+                        //           ),
+                        //           onChanged: (value){
+                        //             setState(() {
+                        //               inputharga = int.parse(value);
+                        //             });
+                        //           },
+                        //           onTap: (){
+                        //             setState(() {
+                        //               seket = colorses.hijauHarga;
+                        //               satus = colorses.hijauHarga;
+                        //             });
+                        //           },
+                        //           controller: _input,
+                        //         ),
+                        //       ),
+                        //       Container(
+                        //         child: Material(
+                        //           type: MaterialType.transparency,
+                        //           elevation: 9.0,
+                        //           color: Colors.transparent,
+                        //           shadowColor: Colors.grey[50],
+                        //           child: InkWell(
+                        //             splashColor: Colors.white30,
+                        //             onTap: (){
+                        //               print(inputharga);
+                        //             },
+                        //             child: Container(
+                        //               width: MediaQuery.of(context).size.width / 8,
+                        //               child: new Icon(
+                        //                 Icons.arrow_right_alt_sharp,
+                        //                 color: Colors.white,
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       )
+                        //     ],
+                        //   ),
+                        // ),
                         Container(
-                          padding: EdgeInsets.all(0),
                           margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: colorses.hijauDasar,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                          margin: EdgeInsets.all(0),
-                                width: MediaQuery.of(context).size.width / 1.25,
-                                child: TextField(
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    hintText: 'Input Harga Manual',
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    focusColor: colorses.hijauDasar,
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0), topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
-                                    ),
-                                  ),
-                                  onChanged: (value){
-                                    setState(() {
-
-                                    });
-                                  },
-                                ),
+                          width: MediaQuery.of(context).size.width / 1,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              hintText: 'Input Harga Manual',
+                              filled: true,
+                              fillColor: Colors.white,
+                              focusColor: colorses.hijauDasar,
+                              border: OutlineInputBorder(
+                                // borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0), topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
                               ),
-                              Container(
-                                // width: MediaQuery.of(context).size.width / 8,
-                                // child: new Icon(
-                                //   Icons.arrow_right_alt_sharp,
-                                //   color: Colors.white,
-                                // ),
-                                child: Material(
-                                  type: MaterialType.transparency,
-                                  elevation: 9.0,
-                                  color: Colors.transparent,
-                                  shadowColor: Colors.grey[50],
-                                  child: InkWell(
-                                    splashColor: Colors.white30,
-                                    onTap: (){
-                                      print(inputharga);
-                                    },
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width / 8,
-                                      child: new Icon(
-                                        Icons.arrow_right_alt_sharp,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
+                            ),
+                            onChanged: (value){
+                              setState(() {
+                                inputharga = int.parse(value);
+                              });
+                            },
+                            onTap: (){
+                              setState(() {
+                                seket = colorses.hijauHarga;
+                                satus = colorses.hijauHarga;
+                              });
+                            },
+                            controller: _input,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: colorses.hijauDasar,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     child: Material(
                       type: MaterialType.transparency,
                       elevation: 9.0,
@@ -313,9 +371,14 @@ class _NgeBitState extends State<NgeBit> {
                         splashColor: Colors.white30,
                         onTap: (){
                           print(inputharga);
+                          print(_input.text);
                         },
                         child: Container(
-
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: 50,
+                          child: Center(
+                            child: Text("Submit"),
+                          ),
                         ),
                       ),
                     ),
