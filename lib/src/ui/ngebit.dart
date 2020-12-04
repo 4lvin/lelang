@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/getLelangDetailModel.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 class NgeBit extends StatefulWidget {
   NgeBit({this.id, this.judul});
@@ -21,6 +22,7 @@ class _NgeBitState extends State<NgeBit> {
   var _input = TextEditingController();
   Color seket = colorses.hijauHarga;
   Color satus = colorses.hijauHarga;
+  bool keyb = true;
 
   int inputharga;
   @override
@@ -152,6 +154,7 @@ class _NgeBitState extends State<NgeBit> {
                                       ),
                                       onTap: (){
                                         setState(() {
+                                          FocusScope.of(context).requestFocus(new FocusNode());
                                           if(seket == colorses.tombolaktif){
                                             inputharga = null;
                                             seket = colorses.hijauHarga;
@@ -218,6 +221,7 @@ class _NgeBitState extends State<NgeBit> {
                                       ),
                                       onTap: (){
                                         setState(() {
+                                          FocusScope.of(context).requestFocus(new FocusNode());
                                           if(satus == colorses.tombolaktif){
                                             inputharga = null;
                                             satus = colorses.hijauHarga;
@@ -225,7 +229,8 @@ class _NgeBitState extends State<NgeBit> {
                                             inputharga = int.parse("100000");
                                             satus = colorses.tombolaktif;
                                             seket = colorses.hijauHarga;
-                                            _input = TextEditingController(text: "");
+                                            _input.clear();
+                                            // _input = TextEditingController(text: "");
                                           }
                                         });
                                       },
@@ -261,68 +266,6 @@ class _NgeBitState extends State<NgeBit> {
                             ),
                           ],
                         ),
-                        // Container(
-                        //   padding: EdgeInsets.all(0),
-                        //   margin: EdgeInsets.all(10),
-                        //   decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.circular(10),
-                        //     color: colorses.hijauDasar,
-                        //   ),
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     children: [
-                        //       Container(
-                        //         margin: EdgeInsets.all(0),
-                        //         width: MediaQuery.of(context).size.width / 1.25,
-                        //         child: TextField(
-                        //           keyboardType: TextInputType.number,
-                        //           decoration: InputDecoration(
-                        //             hintText: 'Input Harga Manual',
-                        //             filled: true,
-                        //             fillColor: Colors.white,
-                        //             focusColor: colorses.hijauDasar,
-                        //             border: OutlineInputBorder(
-                        //               borderRadius: BorderRadius.only(topRight: Radius.circular(0), bottomRight: Radius.circular(0), topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
-                        //             ),
-                        //           ),
-                        //           onChanged: (value){
-                        //             setState(() {
-                        //               inputharga = int.parse(value);
-                        //             });
-                        //           },
-                        //           onTap: (){
-                        //             setState(() {
-                        //               seket = colorses.hijauHarga;
-                        //               satus = colorses.hijauHarga;
-                        //             });
-                        //           },
-                        //           controller: _input,
-                        //         ),
-                        //       ),
-                        //       Container(
-                        //         child: Material(
-                        //           type: MaterialType.transparency,
-                        //           elevation: 9.0,
-                        //           color: Colors.transparent,
-                        //           shadowColor: Colors.grey[50],
-                        //           child: InkWell(
-                        //             splashColor: Colors.white30,
-                        //             onTap: (){
-                        //               print(inputharga);
-                        //             },
-                        //             child: Container(
-                        //               width: MediaQuery.of(context).size.width / 8,
-                        //               child: new Icon(
-                        //                 Icons.arrow_right_alt_sharp,
-                        //                 color: Colors.white,
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
                         Container(
                           margin: EdgeInsets.all(10),
                           width: MediaQuery.of(context).size.width / 1,
@@ -341,6 +284,8 @@ class _NgeBitState extends State<NgeBit> {
                             onChanged: (value){
                               setState(() {
                                 inputharga = int.parse(value);
+                                seket = colorses.hijauHarga;
+                                satus = colorses.hijauHarga;
                               });
                             },
                             onTap: (){

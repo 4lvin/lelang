@@ -60,6 +60,7 @@ class _HomeState extends State<Home> {
     final double widthScreen = MediaQuery.of(context).size.width;
     final double heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
+
         body: tipe=="Petani"?Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

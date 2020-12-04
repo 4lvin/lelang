@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lelangapp/src/pref/preferences.dart';
 import 'package:lelangapp/src/ui/home.dart';
 import 'package:lelangapp/src/ui/home2.dart';
 import 'package:lelangapp/src/ui/profilePage.dart';
 import 'package:lelangapp/src/ui/transaksiPage.dart';
+import 'package:lelangapp/src/ui/uploadbarang.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
 import 'package:toast/toast.dart';
 
@@ -15,6 +17,7 @@ class ControllerPage extends StatefulWidget {
 
 class _ControllerPageState extends State<ControllerPage> {
   int _selectedIndex;
+  String tipe;
   final PageStorageBucket bucket = PageStorageBucket();
   DateTime currentBackPressTime;
   final List<Widget> _widgetOptions = [
@@ -22,6 +25,7 @@ class _ControllerPageState extends State<ControllerPage> {
     TransaksiPage(),
     ProfilePage(),
     HomePage2(),
+    // UploadBarang(),
   ];
 
   Future<bool> _onWillPop() {
@@ -48,6 +52,13 @@ class _ControllerPageState extends State<ControllerPage> {
         ? _selectedIndex = 0
         : _selectedIndex = widget.selected;
     super.initState();
+    getTipe().then((value) {
+      if (mounted) {
+        setState(() {
+          tipe = value;
+        });
+      }
+    });
   }
 
   @override
@@ -65,8 +76,12 @@ class _ControllerPageState extends State<ControllerPage> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.confirmation_number),
-            title: Text('Transaksi'),
+            icon: Icon(
+              tipe == 'Petani'? Icons.upload_sharp:Icons.confirmation_number
+            ),
+            title: Text(
+              tipe == 'Petani'? 'Upload':'Transaksi'
+            ),
           ),
          // BottomNavigationBarItem(
          //   icon: Icon(Icons.mail_outline),
@@ -80,6 +95,10 @@ class _ControllerPageState extends State<ControllerPage> {
             icon: Icon(Icons.add),
             title: Text("home 2")
           ),
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.file_upload),
+          //     title: Text("Upload")
+          // ),
         ],
         elevation: 16,
         unselectedItemColor: const Color(0xFFbdbfbe),
