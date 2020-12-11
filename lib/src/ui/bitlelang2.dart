@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/getLelangDetailModel.dart';
 import 'package:lelangapp/src/ui/ngebit.dart';
@@ -111,7 +112,8 @@ class _BitLelang2State extends State<BitLelang2> {
                       ),
                       Container(
                         child: Text(
-                          'Rp ' + snapshot.data.result.harga,
+                          // 'Rp ' + snapshot.data.result.harga,
+                          NumberFormat.currency(locale: 'id', symbol: 'Rp ').format(snapshot.data.result.harga),
                           style: TextStyle(
                               color: colorses.hijauHarga
                           ),

@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/getLelangDetailModel.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
@@ -114,7 +115,8 @@ class _NgeBitState extends State<NgeBit> {
                         ),
                         Container(
                           child: Text(
-                            'Rp ' + snapshot.data.result.harga,
+                            // 'Rp ' + snapshot.data.result.harga,
+                            NumberFormat.currency(locale: 'id', symbol: 'Rp ').format(snapshot.data.result.harga),
                             style: TextStyle(
                                 color: colorses.hijauHarga
                             ),

@@ -46,6 +46,7 @@ class Result {
     this.jenis,
     this.deskripsi,
     this.created,
+    this.berat,
     this.v,
   });
 
@@ -55,12 +56,13 @@ class Result {
   String panen;
   String judul;
   String ukuran;
-  String harga;
+  int harga;
   String timbangan;
   String lokasi;
   String jenis;
   String deskripsi;
   DateTime created;
+  int berat;
   int v;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
@@ -76,6 +78,7 @@ class Result {
     jenis: json["jenis"],
     deskripsi: json["deskripsi"],
     created: DateTime.parse(json["created"]),
+    berat: json["berat"],
     v: json["__v"],
   );
 
@@ -92,6 +95,7 @@ class Result {
     "jenis": jenis,
     "deskripsi": deskripsi,
     "created": created.toIso8601String(),
+    "berat": berat,
     "__v": v,
   };
 }

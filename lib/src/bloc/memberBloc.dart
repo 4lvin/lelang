@@ -3,6 +3,7 @@ import 'package:lelangapp/src/models/getLelangDetailModel.dart';
 import 'package:lelangapp/src/models/getListLelangPetani.dart';
 import 'package:lelangapp/src/models/getLoginModel.dart';
 import 'package:lelangapp/src/models/getRegisterModel.dart';
+import 'package:lelangapp/src/models/postLelang.dart';
 import 'package:lelangapp/src/resources/repositories.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -13,6 +14,7 @@ class MemberBloc {
   final _otpFetcher = PublishSubject<GetCheckOtpModel>();
   final _listLelangFetcher = PublishSubject<Getlistlelangpetani>();
   final _detailLelang = PublishSubject<Getdetailelang>();
+  final _postlelangFetcher = PublishSubject<Postlelang>();
 
   PublishSubject<GetRegisterModel> get resRegister => _registerFetcher.stream;
 
@@ -23,6 +25,8 @@ class MemberBloc {
   PublishSubject<Getlistlelangpetani> get listLelang => _listLelangFetcher.stream;
 
   PublishSubject<Getdetailelang> get detailLelang => _detailLelang.stream;
+
+  PublishSubject<Postlelang> get ResPostLelang => _postlelangFetcher.stream;
 
   register(
       String nama, String email, String telp, String pass, String tipe) async {
@@ -49,6 +53,11 @@ class MemberBloc {
   DetailLelang(String id) async {
     Getdetailelang getdetailelang = await _repository.DetailLelang(id);
     _detailLelang.sink.add(getdetailelang);
+  }
+
+  PostLelang(String username, String image, String panen,String judul,String ukuranproduk,String harga,String timbangan,String lokasi,String jenis, String deskripsi, String berat) async {
+    Postlelang respostlelang = await _repository.resPostLelang(username, image, panen, judul, ukuranproduk, harga, timbangan, lokasi, jenis, deskripsi, berat);
+    _postlelangFetcher.sink.add(respostlelang);
   }
 
   dispose() {

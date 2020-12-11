@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/getListLelangPetani.dart';
 import 'package:lelangapp/src/pref/preferences.dart';
@@ -245,7 +246,10 @@ class _HomePage2State extends State<HomePage2> {
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(right: 5.0, left: 5.0, bottom: 5.0),
-                                      child: Text(snapshot.data.result[i].harga, style: TextStyle(
+                                      child: Text(
+                                        // snapshot.data.result[i].harga,
+                                        NumberFormat.currency(locale: 'id', symbol: 'Rp ').format(snapshot.data.result[i].harga),
+                                        style: TextStyle(
                                           color: Color.fromRGBO(0,142,118, 1),
                                           fontWeight: FontWeight.w600
                                       ),),

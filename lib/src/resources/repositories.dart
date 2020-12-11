@@ -15,4 +15,7 @@ class Repositories {
   Future getLIstLelang(String petani) => apiProvider.getLIstLelang(petani);
 
   Future DetailLelang(String id) => apiProvider.detailLelang(id);
+
+  Future resPostLelang(String username, String image, String panen,String judul,String ukuranproduk,String harga,String timbangan,String lokasi, String jenis, String deskripsi, String berat)  => apiProvider.postLelang(username, image, panen, judul, ukuranproduk, harga, timbangan, lokasi, jenis, deskripsi, berat);
+
 }

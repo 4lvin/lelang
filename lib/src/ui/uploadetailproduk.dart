@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lelangapp/src/ui/uploadetailpembayaran.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:intl/intl.dart';
 
 class UpProDetail extends StatefulWidget {
   UpProDetail({this.image});
@@ -15,6 +16,7 @@ class UpProDetail extends StatefulWidget {
 
 class _UpProDetailState extends State<UpProDetail> {
   var _nama         = TextEditingController();
+  var _jenis        = TextEditingController();
   var _deskripsi    = TextEditingController();
   var _beratproduk  = TextEditingController();
   var _ukuranproduk = TextEditingController();
@@ -40,7 +42,7 @@ class _UpProDetailState extends State<UpProDetail> {
         children: [
           Container(
             padding: EdgeInsets.only(top: 20,right: 10,left: 10),
-           child: Column(
+           child: ListView(
              children: [
                Container(
                   padding: EdgeInsets.all(10),
@@ -53,7 +55,8 @@ class _UpProDetailState extends State<UpProDetail> {
                           const Radius.circular(0.0),
                         ),
                       ),
-                      hintText: "Nama Produk",
+                      // hintText: "Nama Produk",
+                        labelText: "Nama Produk",
                       fillColor: Colors.white,
                       filled: true
                     ),
@@ -67,6 +70,29 @@ class _UpProDetailState extends State<UpProDetail> {
                Container(
                  padding: EdgeInsets.all(10),
                  child: TextField(
+                   controller: _jenis,
+                   // style: TextStyle(height: 1),
+                   decoration: InputDecoration(
+                       border: OutlineInputBorder(
+                         borderRadius: const BorderRadius.all(
+                           const Radius.circular(0.0),
+                         ),
+                       ),
+                       // hintText: "Jenis",
+                       labelText: "Jenis",
+                       fillColor: Colors.white,
+                       filled: true
+                   ),
+                   onChanged: (value){
+                     setState(() {
+
+                     });
+                   },
+                 ),
+               ),
+               Container(
+                 padding: EdgeInsets.all(10),
+                 child: TextField(
                    controller: _deskripsi,
                    // style: TextStyle(height: 1),
                    decoration: InputDecoration(
@@ -75,7 +101,8 @@ class _UpProDetailState extends State<UpProDetail> {
                            const Radius.circular(0.0),
                          ),
                        ),
-                       hintText: "Deskripsi",
+                       // hintText: "Deskripsi",
+                       labelText: "Deskripsi",
                        fillColor: Colors.white,
                        filled: true
                    ),
@@ -101,7 +128,8 @@ class _UpProDetailState extends State<UpProDetail> {
                            const Radius.circular(0.0),
                          ),
                        ),
-                       hintText: "Berat Produk",
+                       // hintText: "Berat Produk",
+                       labelText: "berat Produk",
                        fillColor: Colors.white,
                        filled: true
                    ),
@@ -123,7 +151,8 @@ class _UpProDetailState extends State<UpProDetail> {
                            const Radius.circular(0.0),
                          ),
                        ),
-                       hintText: "Ukuran Produk",
+                       // hintText: "Ukuran Produk",
+                       labelText: "Ukuran Produk",
                        fillColor: Colors.white,
                        filled: true
                    ),
@@ -136,19 +165,21 @@ class _UpProDetailState extends State<UpProDetail> {
                ),
                Container(
                  padding: EdgeInsets.all(10),
-                 child: DropdownButton(
-                   hint: Text("Timbangan"),
-                   value: _timbanganList,
-                   items: _listTimbangan.map((value) {
-                     return DropdownMenuItem(
-                       child: Text(value),
-                       value: value,);
-                   }).toList(),
-                   onChanged: (value) {
-                     setState(() {
-                       _timbanganList = value;
-                     });
-                   },
+                 child: Center(
+                   child: DropdownButton(
+                     hint: Text("Timbangan"),
+                     value: _timbanganList,
+                     items: _listTimbangan.map((value) {
+                       return DropdownMenuItem(
+                         child: Text(value),
+                         value: value,);
+                     }).toList(),
+                     onChanged: (value) {
+                       setState(() {
+                         _timbanganList = value;
+                       });
+                     },
+                   ),
                  )
                )
              ],
@@ -156,7 +187,7 @@ class _UpProDetailState extends State<UpProDetail> {
           ),
           Container(
             padding: EdgeInsets.only(bottom: 30),
-            child: _nama.text.isEmpty || _deskripsi.text.isEmpty || _beratproduk.text.isEmpty || _ukuranproduk.text.isEmpty || _timbanganList == null?
+            child: _nama.text.isEmpty || _deskripsi.text.isEmpty || _beratproduk.text.isEmpty || _ukuranproduk.text.isEmpty || _jenis.text.isEmpty || _timbanganList == null?
             null :
             Align(
               alignment: Alignment.bottomCenter,
@@ -177,7 +208,7 @@ class _UpProDetailState extends State<UpProDetail> {
                       Navigator.push(
                           context,
                           PageTransition(
-                              child: UpDetPembayaran(image:widget.image,nama:_nama.text,deskripsi:_deskripsi.text,beratproduk:_beratproduk.text,ukuranproduk:_ukuranproduk.text,timbangan:_timbanganList),
+                              child: UpDetPembayaran(image:widget.image,nama:_nama.text,deskripsi:_deskripsi.text,beratproduk:_beratproduk.text,ukuranproduk:_ukuranproduk.text,timbangan:_timbanganList, jenis: _jenis.text,),
                               type: PageTransitionType.bottomToTop,
                               duration: Duration(milliseconds: 200)
                           )
