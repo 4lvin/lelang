@@ -102,8 +102,6 @@ class _HomePembeliState extends State<HomePembeli> {
                         itemBuilder: (context, int i){
                           return GestureDetector(
                             onTap: (){
-                              // print(snapshot.data.result[i].id, snapshot.data.result[i].judul);
-                              // print(snapshot.data)
                               Navigator.push(
                                   context,
                                   PageTransition(

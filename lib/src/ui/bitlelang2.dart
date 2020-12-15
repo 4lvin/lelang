@@ -55,249 +55,253 @@ class _BitLelang2State extends State<BitLelang2> {
         child: StreamBuilder(
           stream: blocMember.detailLelang,
           builder: (context,AsyncSnapshot<Getdetailelang> snapshot){
-            return ListView(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0,1),
-                            blurRadius: 2,
-                            spreadRadius: 0
-                        )
-                      ]
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        child: Image(
-                          image: AssetImage(snapshot.data.result.image),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        child: Text('Durasi pelelangan'),
-                      ),
-                      Container(
-                        child: Text(
-                          d.toString(),
-                          style: TextStyle(
-                              color: colorses.hijauHarga
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                            'Harga saat ini'
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          // 'Rp ' + snapshot.data.result.harga,
-                          NumberFormat.currency(locale: 'id', symbol: 'Rp ').format(snapshot.data.result.harga),
-                          style: TextStyle(
-                              color: colorses.hijauHarga
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0,1),
-                            blurRadius: 2,
-                            spreadRadius: 0
-                        )
-                      ]
-                  ),
-                  child: Column(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text(
-                          'Deskripsi',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                        child: Text(
-                          snapshot.data.result.deskripsi,
-                          textAlign: TextAlign.justify,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Text(
-                                  'Berat'
-                              ),
-                            ),
-                            Container(
-                              child: Text(
-                                  snapshot.data.result.timbangan + ' kg'
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Text(
-                                  'Ukuran'
-                              ),
-                            ),
-                            Container(
-                              child: Text(
-                                  snapshot.data.result.ukuran
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Text(
-                                  'Timbangan'
-                              ),
-                            ),
-                            Container(
-                              child: Text(
-                                  snapshot.data.result.timbangan
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0,1),
-                            blurRadius: 2,
-                            spreadRadius: 0
-                        )
-                      ]
-                  ),
-                  child: Column(
-                    crossAxisAlignment:CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        child: Text(
-                          'Lokasi',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Text(
-                          snapshot.data.result.lokasi,
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Material(
-                    shadowColor: Colors.grey[50],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    elevation: 9,
-                    child: Container(
+            if(snapshot.hasData){
+              if(snapshot.data.hasil == true){
+                return ListView(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
-                        color: colorses.hijauDasar,
-                        borderRadius: BorderRadius.circular(12),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0,1),
+                                blurRadius: 2,
+                                spreadRadius: 0
+                            )
+                          ]
                       ),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: Image(
+                              image: AssetImage(snapshot.data.result.image),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            child: Text('Durasi pelelangan'),
+                          ),
+                          Container(
+                            child: Text(
+                              d.toString(),
+                              style: TextStyle(
+                                  color: colorses.hijauHarga
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                                'Harga saat ini'
+                            ),
+                          ),
+                          Container(
+                            child: Text(
+                              // 'Rp ' + snapshot.data.result.harga,
+                              NumberFormat.currency(locale: 'id', symbol: 'Rp ').format(snapshot.data.result.harga),
+                              style: TextStyle(
+                                  color: colorses.hijauHarga
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0,1),
+                                blurRadius: 2,
+                                spreadRadius: 0
+                            )
+                          ]
+                      ),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Text(
+                              'Deskripsi',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                            child: Text(
+                              snapshot.data.result.deskripsi,
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Container(
+                                  child: Text(
+                                      'Berat'
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                      snapshot.data.result.timbangan + ' kg'
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Container(
+                                  child: Text(
+                                      'Ukuran'
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                      snapshot.data.result.ukuran
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Container(
+                                  child: Text(
+                                      'Timbangan'
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                      snapshot.data.result.timbangan
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                offset: Offset(0,1),
+                                blurRadius: 2,
+                                spreadRadius: 0
+                            )
+                          ]
+                      ),
+                      child: Column(
+                        crossAxisAlignment:CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              'Lokasi',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Text(
+                              snapshot.data.result.lokasi,
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
                       child: Material(
-                        type: MaterialType.transparency,
-                        elevation: 9.0,
-                        color: Colors.transparent,
                         shadowColor: Colors.grey[50],
-                        child: InkWell(
-                          splashColor: Colors.white30,
-                          customBorder: RoundedRectangleBorder(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 9,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: colorses.hijauDasar,
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: NgeBit(id: snapshot.data.result.id,judul: snapshot.data.result.judul,),
-                                    type: null
-                                )
-                            );
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 70,
-                            height: 50,
-                            child: Center(
-                                child: Text(
-                                  "IKUT PELELANGAN",
-                                  style: TextStyle(color: Colors.white),
-                                )),
+                          child: Material(
+                            type: MaterialType.transparency,
+                            elevation: 9.0,
+                            color: Colors.transparent,
+                            shadowColor: Colors.grey[50],
+                            child: InkWell(
+                              splashColor: Colors.white30,
+                              customBorder: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: NgeBit(id: snapshot.data.result.id,judul: snapshot.data.result.judul,),
+                                        type: null
+                                    )
+                                );
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 70,
+                                height: 50,
+                                child: Center(
+                                    child: Text(
+                                      "IKUT PELELANGAN",
+                                      style: TextStyle(color: Colors.white),
+                                    )),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                )
-              ],
-            );
+                    )
+                  ],
+                );
+              }
+            }
           },
         ),
       ),
