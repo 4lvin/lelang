@@ -175,7 +175,7 @@ class _UpDetPembayaranState extends State<UpDetPembayaran> {
                               confirmButtonText: "Ok",
                               confirmButtonColor: Color(0xff96d873),
                               // subtitle: "Sweet alert is pretty",
-                              showCancelButton: true, onPress: (bool isConfirm){
+                              showCancelButton: false, onPress: (bool isConfirm){
                             if(isConfirm){
                               Navigator.of(context)
                                   .pushNamedAndRemoveUntil('/controllPage', (Route<dynamic> route) => false);

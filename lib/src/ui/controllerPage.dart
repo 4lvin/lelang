@@ -3,6 +3,7 @@ import 'package:lelangapp/src/pref/preferences.dart';
 import 'package:lelangapp/src/ui/home.dart';
 import 'package:lelangapp/src/ui/home2.dart';
 import 'package:lelangapp/src/ui/profilePage.dart';
+import 'package:lelangapp/src/ui/routehome.dart';
 import 'package:lelangapp/src/ui/transaksiPage.dart';
 import 'package:lelangapp/src/ui/uploadbarang.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
@@ -21,7 +22,8 @@ class _ControllerPageState extends State<ControllerPage> {
   final PageStorageBucket bucket = PageStorageBucket();
   DateTime currentBackPressTime;
   final List<Widget> _widgetOptions = [
-    Home(),
+    // Home(),
+    RouteHome(),
     TransaksiPage(),
     ProfilePage(),
     HomePage2(),

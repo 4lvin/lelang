@@ -18,4 +18,5 @@ class Repositories {
 
   Future resPostLelang(String username, String image, String panen,String judul,String ukuranproduk,String harga,String timbangan,String lokasi, String jenis, String deskripsi, String berat)  => apiProvider.postLelang(username, image, panen, judul, ukuranproduk, harga, timbangan, lokasi, jenis, deskripsi, berat);
 
+  Future resLelangAkif() => apiProvider.GetLelangAktif();
 }

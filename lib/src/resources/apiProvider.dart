@@ -9,13 +9,14 @@ import 'package:lelangapp/src/models/getLoginModel.dart';
 import 'dart:io';
 
 import 'package:lelangapp/src/models/getRegisterModel.dart';
+import 'package:lelangapp/src/models/listlelangaktif.dart';
 import 'package:lelangapp/src/models/postLelang.dart';
 
 class ApiProviders {
   String url = "https://jongjava.tech/lelang/restapi";
-  // String url2 = "http://192.168.100.156:3000";
+  String url2 = "http://192.168.100.64:3000";
   // String url2 = "http://192.168.1.3:3000";
-  String url2 = "http://192.168.89.13:3000";
+  // String url2 = "http://192.168.89.13:3000";
 
   Future register(
       String nama, String email, String telp, String pass, String tipe) async {
@@ -146,6 +147,15 @@ class ApiProviders {
       throw Exception("request salah");
     } on TimeoutException catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  Future GetLelangAktif() async {
+    final getList = await client.get("$url2/v1/lelang/aktif");
+    if (getList.statusCode  ==  200){
+      return Lelangaktif.fromJson(json.decode(getList.body));
+    } else {
+      throw Exception('Failed to Load Setor');
     }
   }
 }
