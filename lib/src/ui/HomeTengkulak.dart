@@ -132,13 +132,6 @@ class _HomePembeliState extends State<HomePembeli> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                                       child: Center(
-                                        // child: Image(
-                                        //   fit: BoxFit.cover,
-                                        //   image: AssetImage(
-                                        //     snapshot.data.result[i].image
-                                        //   ),
-                                        //   height: MediaQuery.of(context).size.height * 0.25,
-                                        // ),
                                         child: DisplayPictureScreen(imageAnalysed: snapshot.data.result[i].image),
                                       ),
                                     ),
@@ -150,6 +143,12 @@ class _HomePembeliState extends State<HomePembeli> {
                                             fontSize: 20,
                                             fontWeight: FontWeight.w700
                                         ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5, bottom: 0, right: 5, left: 5),
+                                      child: Text(
+                                        "Udang "+snapshot.data.result[i].timbangan
                                       ),
                                     ),
                                     Container(

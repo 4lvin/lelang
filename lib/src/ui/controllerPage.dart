@@ -3,6 +3,7 @@ import 'package:lelangapp/src/pref/preferences.dart';
 import 'package:lelangapp/src/ui/home.dart';
 import 'package:lelangapp/src/ui/home2.dart';
 import 'package:lelangapp/src/ui/profilePage.dart';
+import 'package:lelangapp/src/ui/route2.dart';
 import 'package:lelangapp/src/ui/routehome.dart';
 import 'package:lelangapp/src/ui/transaksiPage.dart';
 import 'package:lelangapp/src/ui/uploadbarang.dart';
@@ -24,7 +25,8 @@ class _ControllerPageState extends State<ControllerPage> {
   final List<Widget> _widgetOptions = [
     // Home(),
     RouteHome(),
-    TransaksiPage(),
+    // TransaksiPage(),
+    RoutePage2(),
     ProfilePage(),
     HomePage2(),
     // UploadBarang(),
