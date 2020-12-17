@@ -23,6 +23,6 @@ class Repositories {
   Future resLelangAkif() => apiProvider.GetLelangAktif();
 
   Future resPostBit(String Username, String id, String nominal) => apiProvider.PostBit(Username,id,nominal);
-}
 
-// String Username,String id,String nominal
+  Future resListBitSuplier(String Username) => apiProvider.GetListBitSuplier(Username);
+}

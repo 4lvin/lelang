@@ -180,6 +180,8 @@ class _UpDetPembayaranState extends State<UpDetPembayaran> {
                               Navigator.of(context)
                                   .pushNamedAndRemoveUntil('/controllPage', (Route<dynamic> route) => false);
                               return false;
+                            } else {
+                              return null;
                             }
                           }
                           );

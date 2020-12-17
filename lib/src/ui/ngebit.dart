@@ -12,6 +12,7 @@ import 'package:lelangapp/src/ui/utils/colors.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:lelangapp/src/ui/utils/loading.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 class NgeBit extends StatefulWidget {
   NgeBit({this.id, this.judul});
@@ -335,11 +336,31 @@ class _NgeBitState extends State<NgeBit> {
                           splashColor: Colors.white30,
                           onTap: (){
                             Dialogs.showLoading(context);
-                            // blocMember.PostBit(username,snapshot.data.result.id,inputharga.toString());
-                            // blocMember.ResPostBit.listen((event) {
-                            //   Dialogs.dismiss(context);
-                            //   print(event.hasil);
-                            // });
+                            blocMember.PostBit(username,snapshot.data.result.id,inputharga.toString());
+                            blocMember.ResPostBit.listen((event) {
+                              if(event.hasil == true){
+                                Dialogs.dismiss(context);
+                                SweetAlert.show(
+                                  context,
+                                  title: "berhasil",
+                                  // cancelButtonText: "Ok",
+                                  confirmButtonText: "Ok",
+                                  confirmButtonColor: Color(0xff96d873),
+                                    showCancelButton: false, onPress: (bool isConfirm){
+                                    if(isConfirm){
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil('/controllPage', (Route<dynamic> route) => false);
+                                      return false;
+                                    } else {
+                                      return null;
+                                    }
+                                  }
+                                );
+                              } else {
+                                Dialogs.dismiss(context);
+                                SweetAlert.show(context, title: event.message);
+                              }
+                            });
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width / 2,

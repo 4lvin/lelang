@@ -10,13 +10,14 @@ import 'dart:io';
 
 import 'package:lelangapp/src/models/getRegisterModel.dart';
 import 'package:lelangapp/src/models/listlelangaktif.dart';
+import 'package:lelangapp/src/models/listransaksisuplier.dart';
 import 'package:lelangapp/src/models/postLelang.dart';
 import 'package:lelangapp/src/models/postNgebit.dart';
 
 class ApiProviders {
   String url = "https://jongjava.tech/lelang/restapi";
-  String url2 = "http://192.168.100.19:3000";
-  // String url2 = "http://192.168.1.3:3000";
+  // String url2 = "http://192.168.100.19:3000";
+  String url2 = "http://192.168.1.3:3000";
   // String url2 = "http://192.168.89.13:3000";
 
   Future register(
@@ -171,6 +172,33 @@ class ApiProviders {
     .timeout(const Duration(seconds: 11));
       if (getRes.statusCode  ==  200){
         return Ngebit.fromJson(json.decode(getRes.body));
+      } else {
+        throw Exception('Failed to Load Setor');
+      }
+    } on SocketException catch (e) {
+      throw Exception(e.toString());
+    } on HttpException {
+      {
+        throw Exception("tidak menemukan post");
+      }
+    } on FormatException {
+      throw Exception("request salah");
+    } on TimeoutException catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future GetListBitSuplier(String Username) async {
+    var body = jsonEncode({'Username': Username});
+    try {
+      final getRes = await client
+          .post("$url2/v1/bit/allbysuplier",
+          headers: {"Content-Type": "application/json"},
+          body: body
+      )
+          .timeout(const Duration(seconds: 11));
+      if (getRes.statusCode  ==  200){
+        return ListBitSuplier.fromJson(json.decode(getRes.body));
       } else {
         throw Exception('Failed to Load Setor');
       }
