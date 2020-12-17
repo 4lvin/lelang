@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 import 'apiProvider.dart';
 
 class Repositories {
@@ -19,4 +21,8 @@ class Repositories {
   Future resPostLelang(String username, String image, String panen,String judul,String ukuranproduk,String harga,String timbangan,String lokasi, String jenis, String deskripsi, String berat)  => apiProvider.postLelang(username, image, panen, judul, ukuranproduk, harga, timbangan, lokasi, jenis, deskripsi, berat);
 
   Future resLelangAkif() => apiProvider.GetLelangAktif();
+
+  Future resPostBit(String Username, String id, String nominal) => apiProvider.PostBit(Username,id,nominal);
 }
+
+// String Username,String id,String nominal
