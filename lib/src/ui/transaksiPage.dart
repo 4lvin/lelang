@@ -83,6 +83,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
                               print(snapshot.data.result[i].barang);
                             },
                             child: Container(
+                              // height: MediaQuery.of(context).size.height *0.4,
+                              padding: EdgeInsets.zero,
                               margin: EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -141,7 +143,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                     )
                                   ),
                                   Container(
-                                      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 5),
+                                      padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
@@ -169,18 +171,6 @@ class _TransaksiPageState extends State<TransaksiPage> {
                           );
                         }
                     );
-                    // return GridView.builder(
-                    //     itemCount: snapshot.data.result.length,
-                    //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //         crossAxisCount: 2,
-                    //         childAspectRatio: widthScreen/(heightScreen * 1.1)
-                    //     ),
-                    //     itemBuilder: (context, int i){
-                    //       return Container(
-                    //
-                    //       );
-                    //     }
-                    // );
                   } else {
                     return Container();
                   }
