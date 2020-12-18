@@ -75,7 +75,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                         itemCount: snapshot.data.result.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 1,
-                            childAspectRatio: widthScreen/(heightScreen * 0.9)
+                            childAspectRatio: widthScreen/(heightScreen * 0.47)
                         ),
                         itemBuilder: (context, int i){
                           return GestureDetector(
@@ -84,8 +84,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
                             },
                             child: Container(
                               // height: MediaQuery.of(context).size.height *0.4,
-                              padding: EdgeInsets.zero,
-                              margin: EdgeInsets.all(5),
+                              // padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(color: Colors.grey),
@@ -104,10 +104,11 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                 children: [
                                   Container(
                                     padding: EdgeInsets.all(10),
+                                    height: MediaQuery.of(context).size.height * 0.3,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10)),
                                       child: Center(
-                                        child: DisplayPictureScreen(imageAnalysed:snapshot.data.result[i].barang.image),
+                                        child: DisplayPictureScreen(imageAnalysed:snapshot.data.result[i].barang.image, number:i.toString()),
                                       ),
                                     ),
                                   ),
@@ -143,7 +144,7 @@ class _TransaksiPageState extends State<TransaksiPage> {
                                     )
                                   ),
                                   Container(
-                                      padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                                      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
@@ -411,7 +412,8 @@ class _TransaksiPageState extends State<TransaksiPage> {
 
 class DisplayPictureScreen extends StatefulWidget {
   final String imageAnalysed;
-  const DisplayPictureScreen({Key key, this.imageAnalysed}) : super(key: key);
+  final String number;
+  const DisplayPictureScreen({Key key, this.imageAnalysed, this.number}) : super(key: key);
 
   @override
   _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
@@ -424,7 +426,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   void writeFile() async {
     final decodedBytes = base64Decode(widget.imageAnalysed);
     final directory = await getApplicationDocumentsDirectory();
-    fileImg = File('${directory.path}/testImage.png');
+    fileImg = File('${directory.path}/'+widget.number+'.png');
     print(fileImg.path);
     fileImg.writeAsBytesSync(List.from(decodedBytes));
 
