@@ -101,7 +101,7 @@ class _HomePetaniState extends State<HomePetani> {
                         itemCount: snapshot.data.result.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            childAspectRatio: widthScreen/(heightScreen * 1.1)
+                            childAspectRatio: widthScreen/(heightScreen * 1)
                         ),
                         itemBuilder: (context, int i){
                           return GestureDetector(
@@ -135,18 +135,22 @@ class _HomePetaniState extends State<HomePetani> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                                      child: Center(
-                                        // child: Image(
-                                        //   fit: BoxFit.cover,
-                                        //   image: AssetImage(
-                                        //     snapshot.data.result[i].image
-                                        //   ),
-                                        //   height: MediaQuery.of(context).size.height * 0.25,
-                                        // ),
-                                        child: DisplayPictureScreen(imageAnalysed: snapshot.data.result[i].image),
+                                    Container(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                                        child: Center(
+                                          // child: Image(
+                                          //   fit: BoxFit.cover,
+                                          //   image: AssetImage(
+                                          //     snapshot.data.result[i].image
+                                          //   ),
+                                          //   height: MediaQuery.of(context).size.height * 0.25,
+                                          // ),
+                                          child: DisplayPictureScreen(imageAnalysed: snapshot.data.result[i].image, number:i.toString()),
+                                        ),
                                       ),
+                                      height: MediaQuery.of(context).size.height / 3,
+                                      padding: EdgeInsets.all(10),
                                     ),
                                     Container(
                                       padding: EdgeInsets.only(top: 10, right: 5, left: 5),
@@ -211,7 +215,8 @@ class _HomePetaniState extends State<HomePetani> {
 
 class DisplayPictureScreen extends StatefulWidget {
   final String imageAnalysed;
-  const DisplayPictureScreen({Key key, this.imageAnalysed}) : super(key: key);
+  final String number;
+  const DisplayPictureScreen({Key key, this.imageAnalysed, this.number}) : super(key: key);
 
   @override
   _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
@@ -224,7 +229,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   void writeFile() async {
     final decodedBytes = base64Decode(widget.imageAnalysed);
     final directory = await getApplicationDocumentsDirectory();
-    fileImg = File('${directory.path}/testImage.png');
+    fileImg = File('${directory.path}/'+widget.number+'.png');
     print(fileImg.path);
     fileImg.writeAsBytesSync(List.from(decodedBytes));
 
