@@ -97,7 +97,7 @@ class _HomePembeliState extends State<HomePembeli> {
                         itemCount: snapshot.data.result.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            childAspectRatio: widthScreen/(heightScreen * 1.1)
+                            childAspectRatio: widthScreen/(heightScreen * 1.01)
                         ),
                         itemBuilder: (context, int i){
                           return GestureDetector(
@@ -175,7 +175,7 @@ class _HomePembeliState extends State<HomePembeli> {
                                         ),),
                                     ),
                                     Container(
-                                      padding: EdgeInsets.all(5),
+                                      padding: EdgeInsets.only(right: 5.0, left: 5.0, bottom: 10),
                                       child: Row(
                                         children: <Widget>[
                                           Icon(Icons.person_pin_circle, size: 12,),
