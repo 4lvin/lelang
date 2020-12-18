@@ -16,8 +16,8 @@ import 'package:lelangapp/src/models/postNgebit.dart';
 
 class ApiProviders {
   String url = "https://jongjava.tech/lelang/restapi";
-  // String url2 = "http://192.168.100.19:3000";
-  String url2 = "http://192.168.1.3:3000";
+  String url2 = "http://192.168.100.19:3000";
+  // String url2 = "http://192.168.1.3:3000";
   // String url2 = "http://192.168.89.13:3000";
 
   Future register(
@@ -203,7 +203,8 @@ class ApiProviders {
         throw Exception('Failed to Load Setor');
       }
     } on SocketException catch (e) {
-      throw Exception(e.toString());
+      // throw Exception(e.toString());
+      throw Exception('error');
     } on HttpException {
       {
         throw Exception("tidak menemukan post");

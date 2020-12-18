@@ -129,10 +129,14 @@ class _HomePembeliState extends State<HomePembeli> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                                      child: Center(
-                                        child: DisplayPictureScreen(imageAnalysed: snapshot.data.result[i].image),
+                                    Container(
+                                      height: MediaQuery.of(context).size.height / 3,
+                                      padding: EdgeInsets.all(10),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                                        child: Center(
+                                          child: DisplayPictureScreen(imageAnalysed: snapshot.data.result[i].image, number:i.toString()),
+                                        ),
                                       ),
                                     ),
                                     Container(
@@ -204,7 +208,8 @@ class _HomePembeliState extends State<HomePembeli> {
 
 class DisplayPictureScreen extends StatefulWidget {
   final String imageAnalysed;
-  const DisplayPictureScreen({Key key, this.imageAnalysed}) : super(key: key);
+  final String number;
+  const DisplayPictureScreen({Key key, this.imageAnalysed, this.number}) : super(key: key);
 
   @override
   _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
@@ -217,7 +222,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   void writeFile() async {
     final decodedBytes = base64Decode(widget.imageAnalysed);
     final directory = await getApplicationDocumentsDirectory();
-    fileImg = File('${directory.path}/testImage.png');
+    fileImg = File('${directory.path}/'+widget.number+'.png');
     print(fileImg.path);
     fileImg.writeAsBytesSync(List.from(decodedBytes));
 
