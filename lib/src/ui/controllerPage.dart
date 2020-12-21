@@ -28,7 +28,7 @@ class _ControllerPageState extends State<ControllerPage> {
     // TransaksiPage(),
     RoutePage2(),
     ProfilePage(),
-    HomePage2(),
+    // HomePage2(),
     // UploadBarang(),
   ];
 
@@ -95,10 +95,10 @@ class _ControllerPageState extends State<ControllerPage> {
             icon: Icon(Icons.person_outline),
             title: Text('Profile'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            title: Text("home 2")
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.add),
+          //   title: Text("home 2")
+          // ),
           // BottomNavigationBarItem(
           //     icon: Icon(Icons.file_upload),
           //     title: Text("Upload")
