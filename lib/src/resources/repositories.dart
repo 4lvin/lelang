@@ -25,4 +25,6 @@ class Repositories {
   Future resPostBit(String Username, String id, String nominal) => apiProvider.PostBit(Username,id,nominal);
 
   Future resListBitSuplier(String Username) => apiProvider.GetListBitSuplier(Username);
+
+  Future resListBitLelang(String Username, String barang) => apiProvider.GetListBitLelang(Username, barang);
 }

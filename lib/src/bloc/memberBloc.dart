@@ -3,6 +3,7 @@ import 'package:lelangapp/src/models/getLelangDetailModel.dart';
 import 'package:lelangapp/src/models/getListLelangPetani.dart';
 import 'package:lelangapp/src/models/getLoginModel.dart';
 import 'package:lelangapp/src/models/getRegisterModel.dart';
+import 'package:lelangapp/src/models/listbitbylelang.dart';
 import 'package:lelangapp/src/models/listlelangaktif.dart';
 import 'package:lelangapp/src/models/listransaksisuplier.dart';
 import 'package:lelangapp/src/models/postLelang.dart';
@@ -21,6 +22,7 @@ class MemberBloc {
   final _listLelangAktifFetcher = PublishSubject<Lelangaktif>();
   final _postBitFetcher = PublishSubject<Ngebit>();
   final _listbitsuplierFetcher = PublishSubject<ListBitSuplier>();
+  final _listbitlelangFetcher = PublishSubject<ListBitLelang>();
 
   PublishSubject<GetRegisterModel> get resRegister => _registerFetcher.stream;
 
@@ -39,6 +41,8 @@ class MemberBloc {
   PublishSubject<Ngebit> get ResPostBit => _postBitFetcher.stream;
 
   PublishSubject<ListBitSuplier> get ResListBitSuplier => _listbitsuplierFetcher.stream;
+
+  PublishSubject<ListBitLelang> get ResListBitLelang => _listbitlelangFetcher.stream;
 
   register(
       String nama, String email, String telp, String pass, String tipe) async {
@@ -87,6 +91,11 @@ class MemberBloc {
     _listbitsuplierFetcher.sink.add(res);
   }
 
+  GetBitLelag(String Username, String barang) async {
+    ListBitLelang res = await _repository.resListBitLelang(Username, barang);
+    _listbitlelangFetcher.sink.add(res);
+  }
+
   dispose() {
     _registerFetcher.close();
     _loginFetcher.close();
@@ -97,6 +106,7 @@ class MemberBloc {
     _listLelangAktifFetcher.close();
     _postBitFetcher.close();
     _listbitsuplierFetcher.close();
+    _listbitlelangFetcher.close();
   }
 }
 

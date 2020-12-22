@@ -7,14 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/listransaksisuplier.dart';
 import 'package:lelangapp/src/pref/preferences.dart';
-import 'package:lelangapp/src/ui/uploadetailproduk.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
-import 'package:lelangapp/src/ui/utils/customBackground.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:image_cropper/image_cropper.dart';
 
 class TransaksiPage extends StatefulWidget {
   @override
@@ -426,7 +420,7 @@ class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
   void writeFile() async {
     final decodedBytes = base64Decode(widget.imageAnalysed);
     final directory = await getApplicationDocumentsDirectory();
-    fileImg = File('${directory.path}/'+widget.number+'.png');
+    fileImg = File('${directory.path}/asd.png');
     print(fileImg.path);
     fileImg.writeAsBytesSync(List.from(decodedBytes));
 

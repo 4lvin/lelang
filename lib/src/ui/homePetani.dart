@@ -9,6 +9,7 @@ import 'package:lelangapp/src/models/getListLelangPetani.dart';
 import 'package:lelangapp/src/pref/preferences.dart';
 import 'package:lelangapp/src/ui/HomeTengkulak.dart';
 import 'package:lelangapp/src/ui/home2.dart';
+import 'package:lelangapp/src/ui/listbitlelang.dart';
 import 'package:lelangapp/src/ui/utils/customBackground.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
@@ -108,14 +109,14 @@ class _HomePetaniState extends State<HomePetani> {
                             onTap: (){
                               print('asd');
                               // print(snapshot.data.result[i].id, snapshot.data.result[i].judul);
-                              // Navigator.push(
-                              //     context,
-                              //     PageTransition(
-                              //         child: BitLelang2(a: snapshot.data.result[i].id,judul: snapshot.data.result[i].judul,),
-                              //         type: PageTransitionType.bottomToTop,
-                              //         duration: Duration(milliseconds: 200)
-                              //     )
-                              // );
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: PageListBitLelang(id: snapshot.data.result[i].id,),
+                                      type: PageTransitionType.bottomToTop,
+                                      duration: Duration(milliseconds: 200)
+                                  )
+                              );
                             },
                             child: Container(
                               margin: EdgeInsets.only(bottom: 10, left: 5, right: 5),
