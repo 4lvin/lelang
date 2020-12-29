@@ -7,9 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/getLelangDetailModel.dart';
 import 'package:lelangapp/src/ui/ngebit.dart';
+import 'package:lelangapp/src/ui/utils/base64toimage.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:path_provider/path_provider.dart';
 
 class BitLelang2 extends StatefulWidget {
   BitLelang2({this.a, this.judul});
@@ -81,7 +81,7 @@ class _BitLelang2State extends State<BitLelang2> {
                           Container(
                             padding: EdgeInsets.all(10),
                             child: Center(
-                              child: DisplayPictureScreen(imageAnalysed:snapshot.data.result.image),
+                              child: Base64ToImage(imageAnalysed:snapshot.data.result.image),
                             ),
                           ),
                         ],
@@ -329,45 +329,5 @@ class Countdown extends AnimatedWidget {
       count.toString(),
       style: new TextStyle(fontSize: 24.0),
     );
-  }
-}
-
-
-class DisplayPictureScreen extends StatefulWidget {
-  final String imageAnalysed;
-  const DisplayPictureScreen({Key key, this.imageAnalysed}) : super(key: key);
-
-  @override
-  _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
-}
-
-class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
-  File fileImg;
-  bool isLoading = true;
-
-  void writeFile() async {
-    final decodedBytes = base64Decode(widget.imageAnalysed);
-    final directory = await getApplicationDocumentsDirectory();
-    fileImg = File('${directory.path}/testImage.png');
-    print(fileImg.path);
-    fileImg.writeAsBytesSync(List.from(decodedBytes));
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      writeFile();
-    });
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return isLoading ? CircularProgressIndicator() : Image.file(fileImg);
   }
 }

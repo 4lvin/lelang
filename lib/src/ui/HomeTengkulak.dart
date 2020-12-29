@@ -9,6 +9,7 @@ import 'package:lelangapp/src/models/listlelangaktif.dart';
 import 'package:lelangapp/src/pref/preferences.dart';
 import 'package:lelangapp/src/ui/bitlelang2.dart';
 import 'package:lelangapp/src/ui/utils/customBackground.dart';
+import 'package:lelangapp/src/ui/utils/loopbase64toimage.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -135,7 +136,7 @@ class _HomePembeliState extends State<HomePembeli> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                                         child: Center(
-                                          child: DisplayPictureScreen(imageAnalysed: snapshot.data.result[i].image, number:i.toString()),
+                                          child: LoopDisplayPictureScreen(imageAnalysed: snapshot.data.result[i].image, number:i.toString()),
                                         ),
                                       ),
                                     ),
@@ -203,45 +204,5 @@ class _HomePembeliState extends State<HomePembeli> {
         ],
       ),
     );
-  }
-}
-
-class DisplayPictureScreen extends StatefulWidget {
-  final String imageAnalysed;
-  final String number;
-  const DisplayPictureScreen({Key key, this.imageAnalysed, this.number}) : super(key: key);
-
-  @override
-  _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
-}
-
-class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
-  File fileImg;
-  bool isLoading = true;
-
-  void writeFile() async {
-    final decodedBytes = base64Decode(widget.imageAnalysed);
-    final directory = await getApplicationDocumentsDirectory();
-    fileImg = File('${directory.path}/'+widget.number+'.png');
-    print(fileImg.path);
-    fileImg.writeAsBytesSync(List.from(decodedBytes));
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      writeFile();
-    });
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return isLoading ? CircularProgressIndicator() : Image.file(fileImg);
   }
 }

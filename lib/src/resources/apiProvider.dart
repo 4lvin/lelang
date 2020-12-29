@@ -17,9 +17,9 @@ import 'package:lelangapp/src/models/postNgebit.dart';
 
 class ApiProviders {
   String url = "https://jongjava.tech/lelang/restapi";
-  String url2 = "http://192.168.100.19:3000";
-  // String url2 = "http://192.168.1.2:3000";
-  // String url2 = "http://192.168.89.13:3000";
+  // String url2 = "http://192.168.100.19:3000";
+  // String url2 = "http://192.168.1.3:3000";
+  String url2 = "http://192.168.89.22:3000";
 
   Future register(
       String nama, String email, String telp, String pass, String tipe) async {

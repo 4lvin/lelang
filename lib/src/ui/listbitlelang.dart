@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/listbitbylelang.dart';
@@ -53,7 +54,100 @@ class _PageListBitLelangState extends State<PageListBitLelang> {
                             child: DisplayPictureScreen(imageAnalysed:snapshot.data.barang.image,nama:snapshot.data.barang.id)
                           ),
                         ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          snapshot.data.barang.judul,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              child: Text('Durasi pelelangan'),
+                            ),
+                            Container(
+                              child: Text('21 : 10 : 11'),
+                            )
+                          ],
+                        ),
+                      ),
+                      snapshot.data.panjang != 0?
+                      // Container(
+                      //   padding: EdgeInsets.all(10),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Container(
+                      //         child: Text('abdul'),
+                      //       ),
+                      //       Container(
+                      //         child: Text('50000'),
+                      //       )
+                      //     ],
+                      //   ),
+                      // )
+                      // Expanded(
+                      //   child: GridView.builder(
+                      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //         crossAxisCount: 1,
+                      //       ),
+                      //       itemCount: snapshot.data.result.length,
+                      //       itemBuilder: (context, int i){
+                      //         return Container(
+                      //           decoration: BoxDecoration(
+                      //             color: Colors.yellow
+                      //           ),
+                      //           child: Row(
+                      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //             children: [
+                      //               Container(
+                      //                 child: Text(
+                      //                     snapshot.data.result[i].suplier.fullname
+                      //                 ),
+                      //               ),
+                      //               Container(
+                      //                 child: Text(
+                      //                     snapshot.data.result[i].nominal.toString()
+                      //                 ),
+                      //               )
+                      //             ],
+                      //           ),
+                      //         );
+                      //       }
+                      //   ),
+                      // )
+
+                      Container(
+                        child: Column(
+                          children: List.generate(snapshot.data.result.length, (index){
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: Text(
+                                    snapshot.data.result[index].suplier.fullname
+                                  ),
+                                ),
+                                Container(
+                                  child: Text(
+                                    snapshot.data.result[index].nominal.toString()
+                                  ),
+                                )
+                              ],
+                            );
+                          }),
+                        ),
                       )
+                          :
+                      Container()
                     ],
                   ),
                 );
