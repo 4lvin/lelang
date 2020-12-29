@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/listbitbylelang.dart';
 import 'package:lelangapp/src/pref/preferences.dart';
+import 'package:lelangapp/src/ui/utils/loopbase64toimage.dart';
 import 'package:path_provider/path_provider.dart';
 
 class PageListBitLelang extends StatefulWidget {
@@ -16,19 +17,54 @@ class PageListBitLelang extends StatefulWidget {
   _PageListBitLelangState createState() => _PageListBitLelangState();
 }
 
-class _PageListBitLelangState extends State<PageListBitLelang> {
+class _PageListBitLelangState extends State<PageListBitLelang> with TickerProviderStateMixin{
   String username;
+  DateTime sekarang;
+  var m;
+  var selisih;
+  AnimationController controller;
   @override
   void initState(){
     getKdUser().then((value) {
       blocMember.GetBitLelag(value, widget.id);
+      blocMember.ResListBitLelang.listen((event) {
+        var parsedEndDate = DateTime.parse(event.barang.panen);
+
+        setState(() {
+          m = parsedEndDate.difference(sekarang).inMinutes;
+          selisih = parsedEndDate.difference(sekarang).inHours;
+          controller = AnimationController(
+              vsync: this,
+              duration: Duration(
+                  hours: selisih,
+                  minutes: m - selisih * 60,
+                  seconds: parsedEndDate.second));
+          controller.reverse(
+              from: controller.value == 0.0 ? 1.0 : controller.value);
+        });
+      });
       setState(() {
         username = value;
       });
     });
   }
+  String get timerString {
+    Duration duration = controller.duration * controller.value;
+    if (duration.inHours >= 24) {
+      var hari = duration.inHours / 24;
+      var pembulatan = hari.ceil();
+      return  pembulatan.toString() + ' hari';
+    } else if(duration.inHours <=  0 && duration.inMinutes <= 0) {
+      return 'Selesai';
+    } else {
+      return '${duration.inHours} : ${duration.inMinutes - selisih * 60} : ${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+    }
+  }
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      sekarang = new DateTime.now();
+    });
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
@@ -51,7 +87,7 @@ class _PageListBitLelangState extends State<PageListBitLelang> {
                         padding: EdgeInsets.only(top: 10),
                         child: ClipRRect(
                           child: Center(
-                            child: DisplayPictureScreen(imageAnalysed:snapshot.data.barang.image,nama:snapshot.data.barang.id)
+                            child: LoopDisplayPictureScreen(imageAnalysed:snapshot.data.barang.image,number:snapshot.data.barang.id)
                           ),
                         ),
                       ),
@@ -73,58 +109,24 @@ class _PageListBitLelangState extends State<PageListBitLelang> {
                             Container(
                               child: Text('Durasi pelelangan'),
                             ),
-                            Container(
-                              child: Text('21 : 10 : 11'),
-                            )
+                            // Container(
+                            //   child: Text('21 : 10 : 11'),
+                            // )
+                            AnimatedBuilder(
+                                animation: controller,
+                                builder: (BuildContext context, Widget child) {
+                                  return Text(
+                                    timerString,
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold),
+                                  );
+                                }),
                           ],
                         ),
                       ),
                       snapshot.data.panjang != 0?
-                      // Container(
-                      //   padding: EdgeInsets.all(10),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //     children: [
-                      //       Container(
-                      //         child: Text('abdul'),
-                      //       ),
-                      //       Container(
-                      //         child: Text('50000'),
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
-                      // Expanded(
-                      //   child: GridView.builder(
-                      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      //         crossAxisCount: 1,
-                      //       ),
-                      //       itemCount: snapshot.data.result.length,
-                      //       itemBuilder: (context, int i){
-                      //         return Container(
-                      //           decoration: BoxDecoration(
-                      //             color: Colors.yellow
-                      //           ),
-                      //           child: Row(
-                      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //             children: [
-                      //               Container(
-                      //                 child: Text(
-                      //                     snapshot.data.result[i].suplier.fullname
-                      //                 ),
-                      //               ),
-                      //               Container(
-                      //                 child: Text(
-                      //                     snapshot.data.result[i].nominal.toString()
-                      //                 ),
-                      //               )
-                      //             ],
-                      //           ),
-                      //         );
-                      //       }
-                      //   ),
-                      // )
-
                       Container(
                         child: Column(
                           children: List.generate(snapshot.data.result.length, (index){
@@ -161,45 +163,5 @@ class _PageListBitLelangState extends State<PageListBitLelang> {
         ),
       ),
     );
-  }
-}
-
-
-class DisplayPictureScreen extends StatefulWidget {
-  final String imageAnalysed;
-  final String nama;
-  const DisplayPictureScreen({Key key, this.imageAnalysed, this.nama}) : super(key: key);
-
-  @override
-  _DisplayPictureScreenState createState() => _DisplayPictureScreenState();
-}
-
-class _DisplayPictureScreenState extends State<DisplayPictureScreen> {
-  File fileImg;
-  bool isLoading = true;
-
-  void writeFile() async {
-    final decodedBytes = base64Decode(widget.imageAnalysed);
-    final directory = await getApplicationDocumentsDirectory();
-    fileImg = File('${directory.path}/'+widget.nama+'.png');
-    fileImg.writeAsBytesSync(List.from(decodedBytes));
-
-    setState(() {
-      isLoading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      writeFile();
-    });
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return isLoading ? CircularProgressIndicator() : Image.file(fileImg);
   }
 }
