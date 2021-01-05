@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:lelangapp/src/bloc/memberBloc.dart';
 import 'package:lelangapp/src/models/getLelangDetailModel.dart';
 import 'package:lelangapp/src/ui/ngebit.dart';
-import 'package:lelangapp/src/ui/utils/base64toimage.dart';
 import 'package:lelangapp/src/ui/utils/colors.dart';
+import 'package:lelangapp/src/ui/utils/loopbase64toimage.dart';
 import 'package:page_transition/page_transition.dart';
 
 class BitLelang2 extends StatefulWidget {
@@ -19,19 +19,56 @@ class BitLelang2 extends StatefulWidget {
   _BitLelang2State createState() => _BitLelang2State();
 }
 
-class _BitLelang2State extends State<BitLelang2> {
-  Duration mundur = new Duration(hours:2, minutes:3, seconds:2);
-  Duration fastestMarathon = new Duration(hours:2, minutes:3, seconds:2);
-  var d = Duration(days: 1, hours: 1, minutes: 33, seconds: 50);
-  // String durasi = assert(mundur.inMinutes == 123);
-  int get hashCode => fastestMarathon.hashCode;
+class _BitLelang2State extends State<BitLelang2> with TickerProviderStateMixin {
+  var m;
+  var selisih;
+  DateTime sekarang;
+  AnimationController controller;
 
-  var stopwatch = new Stopwatch()..start();
   @override
   void initState(){
     blocMember.DetailLelang(widget.a);
+    blocMember.detailLelang.listen((event) {
+      var adds          = DateTime.parse(event.result.panen);
+      var parsedEndDate = adds.add(new Duration(days: 1));
+      setState(() {
+        m = parsedEndDate.difference(sekarang).inMinutes;
+        selisih = parsedEndDate.difference(sekarang).inHours;
+        controller = AnimationController(
+            vsync: this,
+            duration: Duration(
+                hours: selisih,
+                minutes: m - selisih * 60,
+                seconds: parsedEndDate.second));
+        controller.reverse(
+            from: controller.value == 0.0 ? 1.0 : controller.value);
+      });
+    });
   }
+  String get timerString {
+    Duration duration = controller.duration * controller.value;
+    if (duration.inHours >= 24) {
+      var hari = duration.inHours / 24;
+      var pembulatan = hari.ceil();
+      return  pembulatan.toString() + ' hari';
+    } else if(duration.inHours <=  0 && duration.inMinutes <= 0) {
+      return 'Selesai';
+    } else {
+      return '${duration.inHours} : ${duration.inMinutes - selisih * 60} : ${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+    }
+  }
+  @override
+  void dispose() {
+    if (controller != null) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
+    setState(() {
+      sekarang = new DateTime.now();
+    });
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -81,7 +118,7 @@ class _BitLelang2State extends State<BitLelang2> {
                           Container(
                             padding: EdgeInsets.all(10),
                             child: Center(
-                              child: Base64ToImage(imageAnalysed:snapshot.data.result.image),
+                              child: LoopDisplayPictureScreen(imageAnalysed:snapshot.data.result.image,number:snapshot.data.result.id),
                             ),
                           ),
                         ],
@@ -95,14 +132,17 @@ class _BitLelang2State extends State<BitLelang2> {
                           Container(
                             child: Text('Durasi pelelangan'),
                           ),
-                          Container(
-                            child: Text(
-                              d.toString(),
-                              style: TextStyle(
-                                  color: colorses.hijauHarga
-                              ),
-                            ),
-                          )
+                          AnimatedBuilder(
+                              animation: controller,
+                              builder: (BuildContext context, Widget child) {
+                                return Text(
+                                  timerString,
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }),
                         ],
                       ),
                     ),
@@ -313,21 +353,6 @@ class _BitLelang2State extends State<BitLelang2> {
           },
         ),
       ),
-    );
-  }
-}
-
-class Countdown extends AnimatedWidget {
-  Countdown({ Key key, this.animation }) : super(key: key, listenable: animation);
-  Animation<int> animation;
-
-  @override
-  build(BuildContext context){
-    var count = animation.value.toInt();
-    print("count: $count");
-    return new Text(
-      count.toString(),
-      style: new TextStyle(fontSize: 24.0),
     );
   }
 }
